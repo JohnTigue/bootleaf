@@ -1,0 +1,27 @@
+{
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "properties": { "otss_deaths_all": 100},
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -10.7666015625,
+          6.620957270326323
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {"otss_deaths_all": 200},
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -12.7001953125,
+          8.015715997869071
+        ]
+      }
+    }
+  ]
+}

@@ -238,6 +238,11 @@ var markerClusters = new L.MarkerClusterGroup({
 var theaterLayer = L.geoJson(null);
 var theaters = L.geoJson(null, {
   pointToLayer: function (feature, latlng) {
+    var aMarkersOptions = cloneObject( deathsMarkerOptions );
+    aMarkersOptions.radius = feature.properties.otss_deaths_all; 
+    return L.circleMarker( latlng, aMarkersOptions ); 
+
+/* pre-jft:
     return L.marker(latlng, {
       icon: L.icon({
         iconUrl: "assets/img/theater.png",
@@ -248,6 +253,8 @@ var theaters = L.geoJson(null, {
       title: feature.properties.NAME,
       riseOnHover: true
     });
+*/
+
   },
   onEachFeature: function (feature, layer) {
     if (feature.properties) {
@@ -277,7 +284,7 @@ var theaters = L.geoJson(null, {
     }
   }
 });
-$.getJSON("data/DOITT_THEATER_01_13SEPT2010.geojson", function (data) {
+$.getJSON("data/ebola-dummy.geojson", function (data) {
   theaters.addData(data);
   map.addLayer(theaterLayer);
 });
@@ -331,7 +338,10 @@ $.getJSON("data/DOITT_MUSEUM_01_13SEPT2010.geojson", function (data) {
 
 map = L.map("map", {
   zoom: 10,
+/* pre-JFT
   center: [40.702222, -73.979378],
+*/
+  center: [-10.5, 6.5],
   layers: [mapquestOSM, boroughs, markerClusters, highlight],
   zoomControl: false,
   attributionControl: false
@@ -455,7 +465,7 @@ $("#searchbox").click(function () {
 $(document).one("ajaxStop", function () {
   $("#loading").hide();
   /* Fit map to boroughs bounds */
-  map.fitBounds(boroughs.getBounds());
+  map.fitBounds(theaters.getBounds()); // JFT-TODO: hacked this. was boroughs.getBounds(). 
   featureList = new List("features", {valueNames: ["feature-name"]});
   featureList.sort("feature-name", {order:"asc"});
 
