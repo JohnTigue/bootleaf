@@ -1,4 +1,8 @@
 # JFT copied on 2014-03-06 from https://raw.githubusercontent.com/github/gitignore/master/Node.gitignore
+
+# backups
+*.js~
+
 # Logs
 logs
 *.log
