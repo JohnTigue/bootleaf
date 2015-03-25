@@ -34,7 +34,7 @@
             <a href="#" class="navbar-icon pull-right visible-xs" id="nav-btn"><i class="fa fa-bars fa-lg white"></i></a>
             <a href="#" class="navbar-icon pull-right visible-xs" id="sidebar-toggle-btn"><i class="fa fa-search fa-lg white"></i></a>
           </div>
-          <a class="navbar-brand" href="#">EbolaMapper</a>
+          <a class="navbar-brand" href="#">EbolaMapper<sub>(cr)</sub></a>
         </div>
         <div class="navbar-collapse collapse">
           <ul class="nav navbar-nav">
@@ -297,11 +297,36 @@
     <script src="//cdnjs.cloudflare.com/ajax/libs/typeahead.js/0.10.5/typeahead.bundle.min.js"></script>
     <script src="//cdnjs.cloudflare.com/ajax/libs/handlebars.js/2.0.0/handlebars.min.js"></script>
     <script src="//cdnjs.cloudflare.com/ajax/libs/list.js/1.1.1/list.min.js"></script>
+
+
     <script src="//cdn.leafletjs.com/leaflet-0.7.3/leaflet.js"></script>
-    <script src="//api.tiles.mapbox.com/mapbox.js/plugins/leaflet-markercluster/v0.4.0/leaflet.markercluster.js"></script>
+
+    <script src="//api.tiles.mapbox.com/mapbox.js/plugins/leaflet-markercluster/v0.4.0/leaflet.markercluster.js"></script> <!-- this is erroring -->
     <script src="//api.tiles.mapbox.com/mapbox.js/plugins/leaflet-locatecontrol/v0.24.0/L.Control.Locate.js"></script>
+    <script src='assets/js/leaflet-omnivore.js'></script>
     <script src="assets/leaflet-groupedlayercontrol/leaflet.groupedlayercontrol.js"></script>
-    <script src="assets/js/jft.js"></script>
-    <script src="assets/js/app.js"></script>
+
+
+    <script src='assets/js/vendor/log4javascript-1.4.10/log4javascript.js'></script>
+    <script>
+      var log = log4javascript.getLogger("app");
+      // works: var appender = new log4javascript.PopUpAppender();
+      var appender = new log4javascript.BrowserConsoleAppender();
+      appender.setThreshold( log4javascript.Level.TRACE ); // before this, Level.TRACE was not working
+      log.addAppender(appender);
+      log.setLevel( log4javascript.Level.TRACE )
+      log.debug("JFT: just set up log4javascript");
+    </script>
+
+
+
+    <!-- kill: --> <script src="assets/js/JftUtils.js"></script> 
+
+    <!-- if the browserified bundle is before this then kept erroring on line 230 i.e var markerClusters = new L.MarkerClusterGroup({
+         So, just moved ebola-mapper.js below and things were ok.
+         --> 
+    <script src="assets/js/app.js"></script> 
+
+    <script src='ebola-mapper.js' ></script> <!-- This is jft.js browserified -->
   </body>
 </html>
